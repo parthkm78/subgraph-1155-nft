@@ -1,0 +1,25 @@
+type Bid @entity {
+  id: ID!
+  amount: BigInt
+  bidder: Bytes
+  createdAt: Int
+  auctionId : BigInt
+  endTime : BigInt
+} 
+
+type Auction @entity {
+  id: ID!
+  bidCount: BigInt
+  auctionId: BigInt # uint256
+  creator: Bytes # address
+  createdAt: Int
+  updatedAt: Int
+  sellToken: Bytes
+  sellTokenId: BigInt
+  sellTokenValue: BigInt
+  minimalPrice: BigInt
+  data: Bytes
+  
+}
+
+

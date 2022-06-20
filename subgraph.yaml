@@ -1,0 +1,54 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: raribletest1
+    network: rinkeby
+    source:
+      address: "0x812Fe5593c1d2Dd8CA5Ea4372F341A210BBa9A1F"
+      abi: raribletest1
+      startBlock: 10830786
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AuctionBuyOut
+        - AuctionCancelled
+        - AuctionCreated
+        - AuctionFinished
+        - AvailableToWithdraw
+        - BidPlaced
+        - MinimalDurationChanged
+        - MinimalStepChanged
+        - OwnershipTransferred
+        - ProtocolFeeChanged
+        - ProxyChange
+      abis:
+        - name: raribletest1
+          file: ./abis/raribletest1.json
+      eventHandlers:
+        - event: AuctionBuyOut(indexed uint256,address)
+          handler: handleAuctionBuyOut
+        - event: AuctionCancelled(indexed uint256)
+          handler: handleAuctionCancelled
+        - event: AuctionCreated(indexed uint256,address,address,uint96,uint256,uint96,uint96,bytes)
+          handler: handleAuctionCreated
+        - event: AuctionFinished(indexed uint256)
+          handler: handleAuctionFinished
+        - event: AvailableToWithdraw(indexed address,uint256,uint256)
+          handler: handleAvailableToWithdraw
+        - event: BidPlaced(indexed uint256,address,uint256)
+          handler: handleBidPlaced
+        - event: MinimalDurationChanged(uint256,uint256)
+          handler: handleMinimalDurationChanged
+        - event: MinimalStepChanged(uint256,uint256)
+          handler: handleMinimalStepChanged
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ProtocolFeeChanged(uint256,uint256)
+          handler: handleProtocolFeeChanged
+        - event: ProxyChange(indexed bytes4,address)
+          handler: handleProxyChange
+      file: ./src/raribletest1.ts
